@@ -1,0 +1,30 @@
+{
+    "name": "varsite/orders",
+    "description": "Moduł zamówień dla Varsite Platform",
+    "type": "library",
+    "license": "proprietary",
+    "require": {
+        "php": "^8.3",
+        "illuminate/support": "^12.0",
+        "illuminate/database": "^12.0",
+        "illuminate/http": "^12.0",
+        "varsite/platform": "^0.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Varsite\\Orders\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Varsite\\Orders\\OrdersServiceProvider"
+            ]
+        },
+        "branch-alias": {
+            "dev-main": "0.3.x-dev"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

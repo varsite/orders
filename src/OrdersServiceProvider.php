@@ -29,14 +29,17 @@ final class OrdersServiceProvider extends ServiceProvider
     {
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
-        $this->app->make(ModuleManager::class)->register(new OrdersModule());
+        $this->app->make(ModuleManager::class)->module(
+            new OrdersModule(),
+            function (): void {
+            $this->app->make(ModuleRouteRegistrar::class)
+                ->register('orders', require __DIR__.'/../routes/admin.php');
 
-        $this->app->make(ModuleRouteRegistrar::class)
-            ->register('orders', require __DIR__.'/../routes/admin.php');
+            Gate::policy(Order::class, OrderPolicy::class);
 
-        Gate::policy(Order::class, OrderPolicy::class);
-
-        $this->registerCapabilities();
+            $this->registerCapabilities();
+            },
+        );
     }
 
     /**
